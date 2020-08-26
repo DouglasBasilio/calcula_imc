@@ -1,28 +1,37 @@
 var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparecida Nutricionista";
 
-var trPaciente = document.querySelector('#primeiro-paciente');
-var tdPeso = trPaciente.querySelector('.info-peso');
-var tdAltura = trPaciente.querySelector('.info-altura');
-var tdImc = trPaciente.querySelector('.info-imc');
+//var trPaciente = document.querySelectorAll('#primeiro-paciente');
 
-var peso = tdPeso.textContent;
-var altura = tdAltura.textContent;
+var pacientes = document.querySelectorAll(".paciente"); // assim pego um array da classe 'paciente'
 
-var pesoEhValido = true; // assumindo de boa fé que o peso é válido
-var alturaEhValida = true; // assumindo de boa fé que a altura é válida
+for(i = 0; i < pacientes.length; i++){
 
-if(peso <=0 || peso >= 1000) {
-   pesoEhValido = false;
-   tdImc.textContent = "Peso inválido!";
-}
+    var paciente = pacientes[i];
 
-if(altura <= 0 || altura >= 3.00) {
-  alturaEhValida = false;
-  tdImc.textContent = "Altura inválida!";
-}
+    var tdPeso = paciente.querySelector('.info-peso');
+    var peso = tdPeso.textContent;
 
-if(pesoEhValido && alturaEhValida) {
-   var imc = peso / ( altura * altura); 
-   tdImc.textContent = imc;
+    var tdAltura = paciente.querySelector('.info-altura');
+    var altura = tdAltura.textContent;
+
+    var tdImc = paciente.querySelector('.info-imc');    
+
+    var pesoEhValido = true; // assumo que o peso é válido
+    var alturaEhValida = true; // assumo que a altura é válida
+
+    if(peso <=0 || peso >= 1000) {
+        pesoEhValido = false;
+        tdImc.textContent = "Peso inválido!";
+    }
+
+    if(altura <= 0 || altura >= 3.00) {
+        alturaEhValida = false;
+        tdImc.textContent = "Altura inválida!";
+    }
+
+    if(pesoEhValido && alturaEhValida) {
+        var imc = peso / ( altura * altura); 
+        tdImc.textContent = imc.toFixed(2);
+    }
 }
