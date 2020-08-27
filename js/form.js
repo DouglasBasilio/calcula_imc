@@ -12,6 +12,14 @@
         // cria a tr e a td do paciente
         var pacienteTr = montaTr(paciente);
 
+        var erros = validaPaciente(paciente);
+
+        if(erros.length > 0){
+            var mensagemErro = document.querySelector("#mensagem-erro");
+            mensagemErro.textContent = erros;
+            return; //ele sai da função
+        }
+
         // agora crio a variável tabela para associar meu tr ao tbody
         var tabela = document.querySelector("#tabela-pacientes");
         tabela.appendChild(pacienteTr);
@@ -58,4 +66,19 @@
         td.classList.add(classe);
 
         return td;
+    }
+
+    function validaPaciente(paciente){
+        
+        var erros = [];
+        //se o peso não for válido, cai no if
+        //por ser um if simples, posso deixar numa linha e o JS entende
+        if(!validaPeso(paciente.peso)) erros.push("Peso é inválido");
+        
+        //se a altura não for válida, cai no if
+        if(!validaAltura(paciente.altura)){
+            erros.push("Altura é inválida");
+        }
+
+        return erros;
     }
