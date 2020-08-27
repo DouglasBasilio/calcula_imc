@@ -11,12 +11,13 @@
 
         // cria a tr e a td do paciente
         var pacienteTr = montaTr(paciente);
-
+        
         var erros = validaPaciente(paciente);
-
+        console.log(erros);
         if(erros.length > 0){
-            var mensagemErro = document.querySelector("#mensagem-erro");
-            mensagemErro.textContent = erros;
+            //var mensagemErro = document.querySelector("#mensagem-erro");
+            //mensagemErro.textContent = erros;
+            exibeMensagensDeErro(erros);
             return; //ele sai da função
         }
 
@@ -25,7 +26,22 @@
         tabela.appendChild(pacienteTr);
         form.reset();
 
-    })
+        var mensagensErro = document.querySelector("#mensagens-erro");
+        mensagensErro.innerHTML = "";
+
+    });
+
+    function exibeMensagensDeErro(erros){
+        var ul = document.querySelector("#mensagens-erro");
+        ul.innerHTML = "";
+
+        //para cada erro eu crio uma li e add ao ul
+        erros.forEach(function(erro) {
+            var li = document.createElement("li");
+            li.textContent = erro;
+            ul.appendChild(li);
+        });
+    }
 
     function obtemPacienteDoFormulario(form){
         // criei um objeto paciente
@@ -71,6 +87,12 @@
     function validaPaciente(paciente){
         
         var erros = [];
+
+        if(paciente.nome.length == 0) erros.push("O nome não pode ser em branco");
+        if(paciente.gordura.length == 0) erros.push("O campo % de Gordura não pode ficar em branco");
+        if(paciente.peso.length == 0) erros.push("O campo Peso não pode ficar em branco");
+        if(paciente.altura.length == 0) erros.push("O campo Altura do paciente não pode ficar em branco");
+
         //se o peso não for válido, cai no if
         //por ser um if simples, posso deixar numa linha e o JS entende
         if(!validaPeso(paciente.peso)) erros.push("Peso é inválido");
