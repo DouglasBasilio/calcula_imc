@@ -2,16 +2,12 @@ var botaoAdicionar = document.querySelector("#adicionar-paciente");
 botaoAdicionar.addEventListener("click", function(){
 event.preventDefault(); // previno que o botão limpe os campos e recarregue a página
 
-var form = document.querySelector("#form-adiciona"); //pego as tags do form
-var nome = form.nome.value;
-var peso = form.peso.value;
-var altura = form.altura.value;
-var gordura = form.gordura.value;
+var form = document.querySelector("#form-adiciona"); 
+var paciente = obtemPacienteDoFormulario(form);
 
-/*         console.log(nome);
-console.log(peso);
-console.log(altura);
-console.log(gordura); */
+    console.log(paciente);
+    console.log(paciente.nome);
+    console.log(paciente.gordura);
 
 // crio uma variável e determino que ela é o elemento tr
 var pacienteTr = document.createElement("tr");
@@ -41,3 +37,22 @@ pacienteTr.appendChild(imcTd);
 var tabela = document.querySelector("#tabela-pacientes");
 tabela.appendChild(pacienteTr);
 })
+
+function obtemPacienteDoFormulario(form){
+    // criei um objeto paciente
+    var paciente = {
+        nome: form.nome.value,
+        peso: form.peso.value,
+        altura: form.altura.value,
+        gordura: form.gordura.value,
+        imc: calculaImc(form.peso.value, form.altura.value)
+    }
+
+    return paciente; // faço o retorno do objeto
+
+    // extraindo informações do paciente do form
+/*      var nome = form.nome.value;
+        var peso = form.peso.value;
+        var altura = form.altura.value;
+        var gordura = form.gordura.value; */
+}
