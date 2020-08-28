@@ -8,11 +8,16 @@ var tabela = document.querySelector("table");
 tabela.addEventListener("dblclick", function(event){
     console.log(event.target); // alvo que foi clicado na tabela
     console.log(this); // this é o dono do evento
+    event.target.parentNode.classList.add("fadeOut");
 
-    var alvoEvento = event.target;
-    var paiDoAlvo = alvoEvento.parentNode; // TR = paciente = remover
-    paiDoAlvo.remove();
-    // event.target.parentNode.remove(); poderia fazer assim também
+    setTimeout(function(){
+        event.target.parentNode.remove(); //aqui em removo o TR
+    }, 500)
+
+    // poderia fazer assim também
+    //var alvoEvento = event.target;
+    //var paiDoAlvo = alvoEvento.parentNode; // TR = paciente = remover
+    //paiDoAlvo.remove();
 
     // event.target.remove(); aqui eu estava removendo o TD
 });
