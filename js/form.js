@@ -8,9 +8,6 @@
         var paciente = obtemPacienteDoFormulario(form);
 
         //console.log(paciente);
-
-        // cria a tr e a td do paciente
-        var pacienteTr = montaTr(paciente);
         
         var erros = validaPaciente(paciente);
         console.log(erros);
@@ -21,15 +18,23 @@
             return; //ele sai da função
         }
 
-        // agora crio a variável tabela para associar meu tr ao tbody
-        var tabela = document.querySelector("#tabela-pacientes");
-        tabela.appendChild(pacienteTr);
+        adicionaPacienteNaTabela(paciente);
+
         form.reset();
 
         var mensagensErro = document.querySelector("#mensagens-erro");
         mensagensErro.innerHTML = "";
 
     });
+
+    function adicionaPacienteNaTabela(paciente){
+        // cria a tr e a td do paciente
+        var pacienteTr = montaTr(paciente);
+
+        // agora crio a variável tabela para associar meu tr ao tbody
+        var tabela = document.querySelector("#tabela-pacientes");
+        tabela.appendChild(pacienteTr);
+    }
 
     function exibeMensagensDeErro(erros){
         var ul = document.querySelector("#mensagens-erro");
