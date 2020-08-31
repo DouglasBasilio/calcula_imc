@@ -10,12 +10,21 @@ botaoAdicionar.addEventListener("click", function(){
 
     // escuta o evento LOAD e acessa os dados da resposta
     xhr.addEventListener("load", function(){
-        var resposta = xhr.responseText; // carrega texto
+        var erroAjax = document.querySelector("#erro-ajax");
+        
+        if (xhr.status == 200 ){
+            erroAjax.classList.add("invisivel");
+            var resposta = xhr.responseText; // carrega texto
+            var pacientes = JSON.parse(resposta); //converte no array        
+            pacientes.forEach( function(paciente) {
+                adicionaPacienteNaTabela(paciente);
+            });
+        } else{
+            console.log(xhr.status);
+            console.log(xhr.responseText);            
+            erroAjax.classList.remove("invisivel");
+        }
 
-        var pacientes = JSON.parse(resposta); //converte no array        
-        pacientes.forEach( function(paciente) {
-            adicionaPacienteNaTabela(paciente);
-        });
     });
 
     xhr.send(); // pega a requisição e envia
