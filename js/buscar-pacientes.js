@@ -10,7 +10,13 @@ botaoAdicionar.addEventListener("click", function(){
 
     // escuta o evento LOAD e acessa os dados da resposta
     xhr.addEventListener("load", function(){
-        console.log(xhr.responseText);
+        var resposta = xhr.responseText; // carrega texto
+        console.log(resposta);
+
+        var pacientes = JSON.parse(resposta); //converte no array
+        console.log(pacientes);
+
+        
     });
 
     xhr.send(); // pega a requisição e envia
