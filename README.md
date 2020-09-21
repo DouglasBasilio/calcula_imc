@@ -20,30 +20,32 @@ Link da [API de Pacientes][1].
 
 Abaixo uma parte do código usado para conexão:
 
-        var xhr = new XMLHttpRequest(); // é um objeto do JS, responsável por fazer requisições HTTP
-    
-        xhr.open("GET", "http://api-pacientes.herokuapp.com/pacientes"); // abrir a conexão
-    
-        // escuta o evento LOAD e acessa os dados da resposta
-        xhr.addEventListener("load", function(){
-            var erroAjax = document.querySelector("#erro-ajax");
-            
-            if (xhr.status == 200 ){
-                erroAjax.classList.add("invisivel");
-                var resposta = xhr.responseText; // carrega texto
-                var pacientes = JSON.parse(resposta); //converte no array        
-                pacientes.forEach( function(paciente) {
-                    adicionaPacienteNaTabela(paciente);
-                });
-            } else{
-                console.log(xhr.status);
-                console.log(xhr.responseText);            
-                erroAjax.classList.remove("invisivel");
-            }
-    
-        });
-    
-        xhr.send(); // pega a requisição e envia
+```javascript
+    var xhr = new XMLHttpRequest(); // é um objeto do JS, responsável por fazer requisições HTTP
+
+    xhr.open("GET", "http://api-pacientes.herokuapp.com/pacientes"); // abrir a conexão
+
+    // escuta o evento LOAD e acessa os dados da resposta
+    xhr.addEventListener("load", function(){
+        var erroAjax = document.querySelector("#erro-ajax");
+        
+        if (xhr.status == 200 ){
+            erroAjax.classList.add("invisivel");
+            var resposta = xhr.responseText; // carrega texto
+            var pacientes = JSON.parse(resposta); //converte no array        
+            pacientes.forEach( function(paciente) {
+                adicionaPacienteNaTabela(paciente);
+            });
+        } else{
+            console.log(xhr.status);
+            console.log(xhr.responseText);            
+            erroAjax.classList.remove("invisivel");
+        }
+
+    });
+
+    xhr.send(); // pega a requisição e envia
+```
 
 Na parte inferior, podemos cadastrar um paciente. Caso clique em **Adicionar** e algum campo não estiver preenchido, o programa nos dá um alerta.
 
